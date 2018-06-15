@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/back_01" />
+
+    <LinearLayout
+        android:id="@+id/ac_secletfolder_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/set_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="11dp"
+                android:layout_height="19dp"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/left_back" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/selectvideofolder_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ac_secletfolder_iv_line01"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ac_secletfolder_ll_top"
+        android:background="@drawable/main_line" />
+
+    <LinearLayout
+        android:id="@+id/ac_secletfolder_ll01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ac_secletfolder_iv_line01"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ac_secletfolder_nor"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="29dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/folder_nor" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:duplicateParentState="true"
+                android:gravity="left|center"
+                android:text="@string/nor_folder"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:layout_marginRight="10dp"
+                android:duplicateParentState="true"
+                android:gravity="right|center"
+                android:text="共2G/剩余30%"
+                android:textColor="@drawable/textcolor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ac_secletfolder_evt"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="29dp"
+                    android:layout_height="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/folder_evt" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:duplicateParentState="true"
+                android:gravity="left|center"
+                android:text="@string/evt_folder"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:duplicateParentState="true"
+                android:gravity="right|center"
+                android:layout_marginRight="10dp"
+                android:text="共2G/剩余30%"
+                android:textColor="@drawable/textcolor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

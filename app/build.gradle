@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.3'
+    defaultConfig {
+        applicationId = "com.longhorn.viewdvr"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions "versionCode"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        default1 {
+            manifest.srcFile 'src/default1/defaultAndroidManifest.xml'
+            java.srcDir 'src/default1/java' // 指定源码目录
+            resources.srcDir 'src/default1/res' //资源目录
+        }
+        volkswagen {
+            manifest.srcFile 'src/volkswagen/volkswagenAndroidManifest.xml'
+            java.srcDir 'src/volkswagen/java' // 指定源码目录
+            resources.srcDir 'src/volkswagen/res' //资源目录
+        }
+    }
+
+    productFlavors {
+        default1 {
+            manifestPlaceholders = [app_name:"ViewDVR",package_name:"com.longhorn.viewdvr"]
+            applicationId = "com.longhorn.viewdvr"
+            versionName "1.0"
+        }
+        volkswagen {
+            manifestPlaceholders = [app_name:"VWDVR",package_name:"com.longhorn.viewdvr"]
+            applicationId = "com.longhorn.vwdvr"
+            versionName "1.0"
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':flydown')
+    implementation project(path: ':ijkplayer-java')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
+    implementation 'com.bm.photoview:library:1.4.1'
+    implementation project(path: ':giraffeplayer')
+}

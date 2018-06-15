@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/back_01" />
+
+    <LinearLayout
+        android:id="@+id/ac_set_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/set_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:duplicateParentState="true"
+                android:layout_width="11dp"
+                android:layout_height="19dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/left_back" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/set_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ac_set_ll01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ac_set_ll_top"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ac_set_iv_line01"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/main_line" />
+
+        <LinearLayout
+            android:id="@+id/set_wifi"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="WiFi设置"
+                android:textColor="@drawable/textcolor"
+                android:duplicateParentState="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:duplicateParentState="true"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_video"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="录像画质设置"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_vtime"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="录像视频时长"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_zlgy"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="重力感应灵敏度"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/set_spdj"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="视频叠加信息"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_time"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="时间设置"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_version"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="行车记录仪软件信息"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_format"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="格式化TF卡"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/set_factory"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/menu_back"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="5"
+                android:gravity="left|center"
+                android:text="恢复出后设置"
+                android:textColor="@drawable/textcolor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="right|center"
+                android:text=""
+                android:textColor="@drawable/textcolor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center">
+
+                <ImageView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="8dp"
+                    android:layout_height="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/right_ico" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

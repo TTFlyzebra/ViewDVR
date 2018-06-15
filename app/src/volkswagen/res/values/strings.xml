@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">VWDVR</string>
+    <string name="longhorn">DVR explorer-longhorn</string>
+    <string name="main_title">行车记录仪</string>
+    <string name="set_title">设置</string>
+    <string name="setwifi_title">Wifi设置</string>
+    <string name="wifiname">名&#8194;&#8194;&#8194;&#8194;称:</string>
+    <string name="wifipswd1">密&#8194;&#8194;&#8194;&#8194;码:</string>
+    <string name="wifipswd2">确认密码:</string>
+    <string name="confirm">确定</string>
+    <string name="cancle">取消</string>
+    <string name="run_photo">拍照</string>
+    <string name="fast_emerge">紧急录像</string>
+    <string name="photo">照片</string>
+    <string name="video">回放</string>
+    <string name="down">下载</string>
+    <string name="move">移动</string>
+    <string name="selectall">全选</string>
+    <string name="del">删除</string>
+    <string name="format1">共选择了%d张照片</string>
+    <string name="format2">共选择了%d个视频</string>
+    <string name="selectvideofolder_title">视频回放</string>
+    <string name="nor_folder">一般录像文件夹</string>
+    <string name="evt_folder">紧急录像文件夹</string>
+    <string name="local_folder">本地录像文件夹</string>
+    <string name="title_pho">照片</string>
+    <string name="title_nor">一般录像</string>
+    <string name="title_evt">紧急录像</string>
+
+    <string name="test">测试</string>
+    <string name="view_photo">查看图像</string>
+    <string name="view_video">查看录像</string>
+    <string name="view_video_nor">查看录像-普通录像</string>
+    <string name="view_video_evt">查看录像-紧急录像</string>
+    <string name="view_video_loc">查看录像-下載录像</string>
+    <string name="action_settings">设置</string>
+    <string name="empty"></string>
+    <string name="filename">文件名</string>
+    <string name="videoname">视频名称</string>
+    <string name="openfile">打开文件</string>
+    <string name="opendir">打开文件夹</string>
+    <string name="select">选集</string>
+    <string name="nor_video">普通录像</string>
+    <string name="evt_video">紧急录像</string>
+    <string name="loc_video">下載录像</string>
+</resources>

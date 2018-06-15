@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.longhorn.viewdvr.activity.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/ac_photo_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#000"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/set_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="11dp"
+                android:layout_height="19dp"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/left_back" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/ac_photo_title"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/photo"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/ac_photo_cancle"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:text="@string/cancle"
+            android:textColor="@drawable/textcolor"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ac_photo_iv_line01"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ac_photo_ll_top"
+        android:background="@drawable/main_line" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ac_photo_rv01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ac_photo_iv_line02"
+        android:layout_below="@id/ac_photo_iv_line01" />
+    <ImageView
+        android:id="@+id/ac_photo_iv_line02"
+        android:layout_above="@id/ac_photo_ll_end"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/main_line" />
+
+    <LinearLayout
+        android:background="#000"
+        android:id="@+id/ac_photo_ll_end"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ac_photo_down"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="26dp"
+            android:gravity="left|center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/set_down" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:gravity="center"
+                android:text="@string/down"
+                android:duplicateParentState="true"
+                android:textColor="@drawable/textcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ac_photo_move"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/set_move" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:gravity="center"
+                android:text="@string/move"
+                android:duplicateParentState="true"
+                android:textColor="@drawable/textcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ac_photo_selectall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/set_selectall" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:gravity="center"
+                android:text="@string/selectall"
+                android:duplicateParentState="true"
+                android:textColor="@drawable/textcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ac_photo_del"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingRight="26dp"
+            android:gravity="right|center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/set_del" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/del"
+                android:textColor="@drawable/textcolor"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

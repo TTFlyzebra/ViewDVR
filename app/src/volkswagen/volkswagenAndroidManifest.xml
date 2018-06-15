@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.longhorn.viewdvr">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Design.NoActionBar">
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SetWifiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ExplorerPhoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ExplorerNorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ExplorerEvtActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SelcetFolderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FullPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PlayVideoActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullTheme" />
+    </application>
+
+</manifest>
