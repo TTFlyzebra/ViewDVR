@@ -13,14 +13,14 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.longhorn.viewdvr.R;
 import com.longhorn.viewdvr.data.Global;
+import com.longhorn.viewdvr.module.SoundPlay;
 import com.longhorn.viewdvr.module.wifi.CommandType;
+import com.longhorn.viewdvr.module.wifi.NioSocketTools;
 import com.longhorn.viewdvr.module.wifi.ResultData;
 import com.longhorn.viewdvr.module.wifi.SocketResult;
-import com.longhorn.viewdvr.module.wifi.SocketTools;
 import com.longhorn.viewdvr.utils.ByteTools;
 import com.longhorn.viewdvr.utils.FlyLog;
 import com.longhorn.viewdvr.view.RtspVideoView;
@@ -32,18 +32,25 @@ import com.longhorn.viewdvr.view.RtspVideoView;
  */
 public class MainActivity extends Activity implements CommandType, View.OnClickListener, SocketResult {
     private RtspVideoView mViewPlayer;
-    private RelativeLayout bt01, bt02, bt03, bt04;
+    private RelativeLayout bt_pho, bt_evt, bt03, bt04;
     private LinearLayout ll01, ll02, ll_top;
     private ImageView ivline01, ivline02;
     private LinearLayout ivSet, ivLink;
-    private ImageView full_record, full_pho, evtstate, soundstate, fullcontrol, recordstate;
+    private ImageView full_evt, full_pho, evtstate, soundstate, fullcontrol, recordstate;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private boolean full = false;
+    private NioSocketTools nioSocketTools = NioSocketTools.getInstance();
+    private boolean isStop = false;
+    private boolean isEvtRecord = false;
+    private SoundPlay soundPlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        soundPlay = new SoundPlay(this);
+        soundPlay.initSoundPool();
 
         mViewPlayer = findViewById(R.id.ac_main_flyvp01);
 
@@ -54,12 +61,12 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
         ivline02 = findViewById(R.id.ac_main_iv_line02);
         ivSet = findViewById(R.id.ac_main_set);
         ivLink = findViewById(R.id.ac_main_link);
-        bt01 = findViewById(R.id.ac_main_bt01);
-        bt02 = findViewById(R.id.ac_main_bt02);
+        bt_pho = findViewById(R.id.ac_main_bt_pho);
+        bt_evt = findViewById(R.id.ac_main_bt_evt);
         bt03 = findViewById(R.id.ac_main_bt03);
         bt04 = findViewById(R.id.ac_main_bt04);
 //full_record,full_pho,evtstate,soundstate,fullcontrol,recordstate;
-        full_record = findViewById(R.id.full_record);
+        full_evt = findViewById(R.id.full_evt);
         full_pho = findViewById(R.id.full_pho);
         evtstate = findViewById(R.id.ac_main_evt_status);
         soundstate = findViewById(R.id.ac_main_sound_status);
@@ -67,16 +74,16 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
         recordstate = findViewById(R.id.ac_main_record_status);
 
         full_pho.setVisibility(View.GONE);
-        full_record.setVisibility(View.GONE);
+        full_evt.setVisibility(View.GONE);
 
         ivLink.setOnClickListener(this);
         ivSet.setOnClickListener(this);
-        bt01.setOnClickListener(this);
-        bt02.setOnClickListener(this);
+        bt_pho.setOnClickListener(this);
+        bt_evt.setOnClickListener(this);
         bt03.setOnClickListener(this);
         bt04.setOnClickListener(this);
         full_pho.setOnClickListener(this);
-        full_record.setOnClickListener(this);
+        full_evt.setOnClickListener(this);
         fullcontrol.setOnClickListener(this);
 
         mViewPlayer.setPlayUrlArr(new String[]{Global.DVR_RTSP});
@@ -97,7 +104,7 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
             ivline01.setVisibility(View.GONE);
             ivline02.setVisibility(View.GONE);
             full_pho.setVisibility(View.VISIBLE);
-            full_record.setVisibility(View.VISIBLE);
+            full_evt.setVisibility(View.VISIBLE);
         } else {
             WindowManager.LayoutParams params2 = getWindow().getAttributes();
             params2.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -108,7 +115,7 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
             ivline01.setVisibility(View.VISIBLE);
             ivline02.setVisibility(View.VISIBLE);
             full_pho.setVisibility(View.GONE);
-            full_record.setVisibility(View.GONE);
+            full_evt.setVisibility(View.GONE);
         }
     }
 
@@ -116,16 +123,21 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
+        isStop = false;
+        nioSocketTools.registerSocketResult(this);
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
+        isStop=true;
+        nioSocketTools.unregisterSocketResult(this);
         mHandler.removeCallbacksAndMessages(null);
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
+        nioSocketTools.close();
         super.onDestroy();
     }
 
@@ -138,40 +150,17 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
             case R.id.ac_main_set:
                 startActivity(new Intent(MainActivity.this, SetActivity.class));
                 break;
-            case R.id.ac_main_bt01:
-                v.setEnabled(false);
-                SocketTools.getInstance().sendCommand(FAST_PHOTOGRAPHY, new SocketResult() {
-                    @Override
-                    public void result(ResultData msg) {
-                        v.setEnabled(true);
-                        if (msg.getMark() > 0) {
-                            Toast.makeText(MainActivity.this, "拍照完成", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, msg.getMsg(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+            case R.id.ac_main_bt_pho:
+            case R.id.full_pho:
+                bt_pho.setEnabled(false);
+                full_pho.setEnabled(false);
+                nioSocketTools.sendCommand(FAST_PHOTOGRAPHY);
                 break;
-            case R.id.ac_main_bt02:
-                v.setEnabled(false);
-                SocketTools.getInstance().sendCommand(FAST_EMERGE, new SocketResult() {
-                    @Override
-                    public void result(ResultData msg) {
-                        if (msg.getMark() > 0) {
-                            Toast.makeText(MainActivity.this, "开始紧急录像...", Toast.LENGTH_LONG).show();
-                            mHandler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    v.setEnabled(true);
-                                    Toast.makeText(MainActivity.this, "紧急录像完成", Toast.LENGTH_LONG).show();
-                                }
-                            }, 30000);
-                        } else {
-                            v.setEnabled(true);
-                            Toast.makeText(MainActivity.this, msg.getMsg(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+            case R.id.ac_main_bt_evt:
+            case R.id.full_evt:
+                bt_evt.setEnabled(false);
+                full_evt.setEnabled(false);
+                nioSocketTools.sendCommand(FAST_EMERGE);
                 break;
             case R.id.ac_main_bt03:
                 startActivity(new Intent(MainActivity.this, ExplorerPhoActivity.class));
@@ -205,6 +194,36 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
 
     @Override
     public void result(ResultData msg) {
-        FlyLog.d("length=%d,data=%s", msg.getMark(), ByteTools.bytes2HexString(msg.getBytes()));
+        if (isStop) return;
+        try {
+            byte recv[] = msg.getBytes();
+            int command = ByteTools.bytes2ShortInt2(recv, 0);
+            switch (command) {
+                //HEARTBEAT
+                case 0x0010:
+                    isEvtRecord = (recv[4] == 0x01 || recv[4] == 0x02);
+                    evtstate.setVisibility(isEvtRecord?View.VISIBLE:View.GONE);
+                    bt_evt.setEnabled(!isEvtRecord);
+                    full_evt.setEnabled(!isEvtRecord);
+                    recordstate.setVisibility((recv[3] == 0x02 || recv[3] == 0x01)?View.VISIBLE:View.GONE);
+                    soundstate.setImageResource((recv[5] == 0x02 || recv[5] == 0x01)?R.drawable.sound_01:R.drawable.sound_02);
+                    break;
+                //拍照FAST_PHOTOGRAPHY
+                case 0x0211:
+                    bt_pho.setEnabled(true);
+                    full_pho.setEnabled(true);
+//                    if(ByteTools.bytes2Int(recv,2)==0) {
+                    soundPlay.playSound(1, 0);
+//                    }else{
+                        //TODO:拍照失败
+//                    }
+                    break;
+                //获取文件列表GET_FILE_PHO
+                case 0x1002:
+                    break;
+            }
+        } catch (Exception e) {
+            FlyLog.e(e.toString());
+        }
     }
 }

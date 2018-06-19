@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.longhorn.viewdvr.R;
 import com.longhorn.viewdvr.adapter.IAdapater;
@@ -16,9 +15,9 @@ import com.longhorn.viewdvr.adapter.OnLongItemClick;
 import com.longhorn.viewdvr.data.DvrFile;
 import com.longhorn.viewdvr.module.wifi.CommandType;
 import com.longhorn.viewdvr.module.wifi.DataParse;
+import com.longhorn.viewdvr.module.wifi.NioSocketTools;
 import com.longhorn.viewdvr.module.wifi.ResultData;
 import com.longhorn.viewdvr.module.wifi.SocketResult;
-import com.longhorn.viewdvr.module.wifi.SocketTools;
 import com.longhorn.viewdvr.utils.ByteTools;
 import com.longhorn.viewdvr.utils.FlyLog;
 
@@ -47,6 +46,9 @@ public abstract class ExplorerBaseActivity extends Activity implements SocketRes
     protected byte[] mCommand = CommandType.GET_FILE_PHO;
     protected String title = "";
     protected int ridFormat = R.string.format1;
+
+    private NioSocketTools nioSocketTools = NioSocketTools.getInstance();
+    private boolean isStop = false;
 
     protected abstract void initParameters();
 
@@ -81,18 +83,6 @@ public abstract class ExplorerBaseActivity extends Activity implements SocketRes
 
         mTitle.setText(title);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-//        rv01.setPullRefreshEnabled(true);
-//        rv01.setLoadingMoreEnabled(false);
-//        rv01.setLoadingListener(new XRecyclerView.LoadingListener() {
-//            @Override
-//            public void onRefresh() {
-//                rv01.refreshComplete();
-//            }
-//
-//            @Override
-//            public void onLoadMore() {
-//            }
-//        });
         mAdapater.setOnLongItemClick(new OnLongItemClick() {
             @Override
             public void onLongItemClick(View v, int postion) {
@@ -119,13 +109,27 @@ public abstract class ExplorerBaseActivity extends Activity implements SocketRes
 
 
     private void updata() {
-        SocketTools.getInstance().sendCommand(mCommand, this);
+        nioSocketTools.sendCommand(mCommand);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isStop = false;
+        nioSocketTools.registerSocketResult(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         updata();
+    }
+
+    @Override
+    protected void onStop() {
+        isStop = true;
+        nioSocketTools.unregisterSocketResult(this);
+        super.onStop();
     }
 
     @Override
@@ -177,43 +181,47 @@ public abstract class ExplorerBaseActivity extends Activity implements SocketRes
 
     @Override
     public void result(ResultData msg) {
-        FlyLog.d("length=%d,data=%s", msg.getMark(), ByteTools.bytes2HexString(msg.getBytes()));
-        if (msg.getMark() > 0) {
-            try {
-                List<DvrFile> tempList = new ArrayList<>();
-                byte[] data = msg.getBytes();
-                int[] pos = {8};
-                mSumItem = ByteTools.bytes2Int(data, pos[0]);
-                pos[0] += 4;
-                for (int i = 0; i < mSumItem; i++) {
-                    DvrFile dvrFile = DataParse.getDvrFile(data, pos);
-                    dvrFile.rvType = 2;
-                    tempList.add(dvrFile);
-                }
-                Collections.sort(tempList, new Comparator<DvrFile>() {
-                    @Override
-                    public int compare(DvrFile lhs, DvrFile rhs) {
-                        return (rhs.date - lhs.date);
+        if (isStop) return;
+        try {
+            byte recv[] = msg.getBytes();
+            int command = ByteTools.bytes2ShortInt2(recv, 0);
+            switch (command) {
+                //GET_FILE
+                case 0x1002:
+                    List<DvrFile> tempList = new ArrayList<>();
+                    int[] pos = {2};
+                    mSumItem = ByteTools.bytes2Int(recv, pos[0]);
+                    pos[0] += 4;
+                    for (int i = 0; i < mSumItem; i++) {
+                        DvrFile dvrFile = DataParse.getDvrFile(recv, pos);
+                        dvrFile.rvType = 2;
+                        tempList.add(dvrFile);
                     }
-                });
+                    Collections.sort(tempList, new Comparator<DvrFile>() {
+                        @Override
+                        public int compare(DvrFile lhs, DvrFile rhs) {
+                            return (rhs.date - lhs.date);
+                        }
+                    });
 
-                mList.clear();
-                String strMenu = "";
-                for (DvrFile dvrFile : tempList) {
-                    //插入日期菜单
-                    if (!strMenu.equals(dvrFile.getMenu())) {
-                        DvrFile menuDvrFile = new DvrFile();
-                        menuDvrFile.rvType = 1;
-                        menuDvrFile.date = dvrFile.date;
-                        mList.add(menuDvrFile);
-                        strMenu = dvrFile.getMenu();
+                    mList.clear();
+                    String strMenu = "";
+                    for (DvrFile dvrFile : tempList) {
+                        //插入日期菜单
+                        if (!strMenu.equals(dvrFile.getMenu())) {
+                            DvrFile menuDvrFile = new DvrFile();
+                            menuDvrFile.rvType = 1;
+                            menuDvrFile.date = dvrFile.date;
+                            mList.add(menuDvrFile);
+                            strMenu = dvrFile.getMenu();
+                        }
+                        mList.add(dvrFile);
                     }
-                    mList.add(dvrFile);
-                }
-                mAdapater.notifyDataSetChanged();
-            } catch (Exception e) {
-                e.printStackTrace();
+                    mAdapater.notifyDataSetChanged();
+                    break;
             }
+        } catch (Exception e) {
+            FlyLog.e(e.toString());
         }
     }
 }

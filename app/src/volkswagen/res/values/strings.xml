@@ -5,6 +5,7 @@
     <string name="set_title">设置</string>
     <string name="setwifi_title">Wifi设置</string>
     <string name="wifiname">名&#8194;&#8194;&#8194;&#8194;称:</string>
+    <string name="oldwifipswd">旧&#8194;密&#8194;码:</string>
     <string name="wifipswd1">密&#8194;&#8194;&#8194;&#8194;码:</string>
     <string name="wifipswd2">确认密码:</string>
     <string name="confirm">确定</string>

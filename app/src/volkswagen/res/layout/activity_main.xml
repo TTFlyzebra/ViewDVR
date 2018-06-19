@@ -159,7 +159,7 @@
             android:layout_alignParentRight="true"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/full_record"
+                android:id="@+id/full_evt"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:scaleType="fitXY"
@@ -191,7 +191,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:id="@+id/ac_main_bt01"
+                android:id="@+id/ac_main_bt_pho"
                 android:layout_width="155dp"
                 android:layout_height="124dp"
                 android:layout_margin="10dp">
@@ -215,7 +215,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/ac_main_bt02"
+                android:id="@+id/ac_main_bt_evt"
                 android:layout_width="155dp"
                 android:layout_height="124dp"
                 android:layout_margin="10dp">
