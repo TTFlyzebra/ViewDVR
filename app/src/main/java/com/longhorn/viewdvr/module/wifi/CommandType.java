@@ -39,26 +39,26 @@ public interface CommandType {
             (byte) 0x01, (byte) 0x00,//1
             (byte) 0x00, (byte) 0x00,
             (byte) 0x00, (byte) 0x00,
-            (byte) 0x00, (byte) 0x00,
+            (byte) 0x00, (byte) 0x00
     };
 
 
     String UI_REQ_PREVIEW_CMD = "020000000100";
     byte[] UI_REQ_PREVIEW = {
             (byte) 0x02, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x01, (byte) 0x00,
+            (byte) 0x01, (byte) 0x00
     };
 
     String UI_REQ_FILES_CMD = "020000000101";
     byte[] UI_REQ_FILES = {
             (byte) 0x02, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x01, (byte) 0x01,
+            (byte) 0x01, (byte) 0x01
     };
 
     String UI_REQ_CONFIG_CMD = "020000000102";
     byte[] UI_REQ_CONFIG = {
             (byte) 0x02, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x01, (byte) 0x02,
+            (byte) 0x01, (byte) 0x02
     };
 
     String UI_REQ_PLAYBACK_CMD = "020000000103";
@@ -152,7 +152,7 @@ public interface CommandType {
     String REQ_FILE_MOVE_CMD = "060000001021";
     byte[] REQ_FILE_MOVE = {
             (byte) 0x06, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x10, (byte) 0x20,
+            (byte) 0x10, (byte) 0x20
     };
 
     /**
@@ -162,7 +162,7 @@ public interface CommandType {
     String REQ_FILE_DELETE_CMD = "060000001021";
     byte[] REQ_FILE_DELETE = {
             (byte) 0x06, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x10, (byte) 0x21,
+            (byte) 0x10, (byte) 0x21
     };
 
     /**
@@ -189,7 +189,7 @@ public interface CommandType {
     String GET_WIFI_CFG_CMD = "020000001101";
     byte[] GET_WIFI_CFG = {
             (byte) 0x02, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-            (byte) 0x11, (byte) 0x20
+            (byte) 0x11, (byte) 0x01
     };
 
     /**
@@ -267,7 +267,7 @@ public interface CommandType {
      */
     String SET_WIFI_CFG_CMD = "030000001205";
     byte[] SET_WIFI_CFG = {
-            (byte) 0x65, (byte) 0x00, (byte) 0x00, (byte) 0x00,
+            (byte) 0x66, (byte) 0x00, (byte) 0x00, (byte) 0x00,
             (byte) 0x12, (byte) 0x05
     };
 

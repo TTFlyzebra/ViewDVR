@@ -128,6 +128,29 @@ public class ByteTools {
         return true;
     }
 
+    /**
+     * 将short数值转换为占2个字节的byte数组，本方法适用于(低位在前，高位在后)的顺序。
+     *
+     * @param value 要转换的int值
+     * @return byte数组
+     */
+    public static byte[] shortToBytes(int value) {
+        byte[] src = new byte[2];
+        src[1] = (byte) ((value >> 8) & 0xFF);
+        src[0] = (byte) (value & 0xFF);
+        return src;
+    }
+
+    /**
+     * 将short数值转换为占2个字节的byte数组，本方法适用于(高位在前，低位在后)的顺序。
+     */
+    public static byte[] shortToBytes2(int value) {
+        byte[] src = new byte[4];
+        src[0] = (byte) ((value >> 8) & 0xFF);
+        src[1] = (byte) (value & 0xFF);
+        return src;
+    }
+
     public static int bytes2ShortInt(byte[] src, int offset) {
         int value;
         value = (int) ((src[offset] & 0xFF)

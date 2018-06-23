@@ -17,6 +17,5 @@ public class MyApp extends Application {
         super.onCreate();
         FlyOkHttp.getInstance().Init(getApplicationContext());
         DownFileManager.install(getApplicationContext());
-        NioSocketTools.getInstance().init();
     }
 }

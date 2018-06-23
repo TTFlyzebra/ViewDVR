@@ -49,6 +49,8 @@ public class MainActivity extends Activity implements CommandType, View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nioSocketTools.start();
+
         soundPlay = new SoundPlay(this);
         soundPlay.initSoundPool();
 

@@ -7,20 +7,19 @@ import android.os.Looper;
 import com.longhorn.viewdvr.data.Global;
 import com.longhorn.viewdvr.utils.ByteTools;
 import com.longhorn.viewdvr.utils.FlyLog;
-import com.longhorn.viewdvr.utils.IPAdressTools;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.CRC32;
 
 /**
@@ -100,9 +99,9 @@ public class NioSocketTools {
         }
     }
 
-    public void init() {
-        if (threadNum < 0 || heartbeatThread == null) {
-            isRunning.set(true);
+    public void start() {
+        isRunning.set(true);
+        if (threadNum.get() < 1 ) {
             heartbeatThread = new HeartbeatThread();
         }
     }
@@ -110,9 +109,11 @@ public class NioSocketTools {
     public void close() {
         isRunning.set(false);
         mSocketResultList.clear();
+        heartbeatThread = null;
         try {
             client.close();
         } catch (IOException e) {
+            FlyLog.e(e.toString());
             e.printStackTrace();
         }
 
@@ -202,6 +203,19 @@ public class NioSocketTools {
     private void loopSendHeartBeat(long millis) {
         FlyLog.d("loop SendHeartBeat.");
         while (isRunning.get()) {
+            Calendar now = Calendar.getInstance();
+            int year =  now.get(Calendar.YEAR);
+            System.arraycopy(ByteTools.shortToBytes(year),0,CommandType.HEARTBEAT,10,2);
+            int month = now.get(Calendar.MONTH) + 1;
+            System.arraycopy(ByteTools.shortToBytes(month),0,CommandType.HEARTBEAT,12,2);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            System.arraycopy(ByteTools.shortToBytes(day),0,CommandType.HEARTBEAT,14,2);
+            int hour =  now.get(Calendar.HOUR_OF_DAY);
+            System.arraycopy(ByteTools.shortToBytes(hour),0,CommandType.HEARTBEAT,16,2);
+            int minute = now.get(Calendar.MINUTE);
+            System.arraycopy(ByteTools.shortToBytes(minute),0,CommandType.HEARTBEAT,18,2);
+            int second =  now.get(Calendar.SECOND);
+            System.arraycopy(ByteTools.shortToBytes(second),0,CommandType.HEARTBEAT,20,2);
             send(CommandType.HEARTBEAT);
             try {
                 Thread.sleep(millis);
@@ -211,12 +225,12 @@ public class NioSocketTools {
         }
     }
 
-    private static int threadNum = 0;
+    private static AtomicInteger threadNum = new AtomicInteger(0);
 
     private class HeartbeatThread extends Thread {
         public HeartbeatThread() {
-            if (threadNum < 1) {
-                threadNum++;
+            if (threadNum.get() < 1) {
+                threadNum.getAndIncrement();
                 start();
             }
         }
@@ -232,7 +246,7 @@ public class NioSocketTools {
                         @Override
                         public void run() {
                             for (SocketResult socketResult : mSocketResultList) {
-                                socketResult.result(new ResultData(8, new byte[]{0x00,0x00}, "get ip ok"));
+                                socketResult.result(new ResultData(8, new byte[]{0x00, 0x00}, "get ip ok"));
                             }
                         }
                     });
@@ -240,7 +254,7 @@ public class NioSocketTools {
                     loopRecvBytes();
                 }
             }
-            threadNum--;
+            threadNum.getAndDecrement();
         }
     }
 }

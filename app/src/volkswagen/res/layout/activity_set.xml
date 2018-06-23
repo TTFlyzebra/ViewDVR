@@ -129,11 +129,11 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/set_tv_pix"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="right|center"
-                android:text=""
                 android:textColor="@drawable/textcolor"
                 android:textSize="14sp" />
 
@@ -171,6 +171,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/set_tv_mins"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
@@ -214,6 +215,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/set_tv_sensor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
@@ -347,7 +349,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="right|center"
-                android:text=""
+                android:text="V1.0"
                 android:textColor="@drawable/textcolor"
                 android:textSize="14sp" />
 

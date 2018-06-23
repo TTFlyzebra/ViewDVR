@@ -27,6 +27,10 @@
     <string name="title_pho">照片</string>
     <string name="title_nor">一般录像</string>
     <string name="title_evt">紧急录像</string>
+    <string name="alert1">警告提示!</string>
+    <string name="format_alert">格式化后所有内容将清空，确定要格式化吗？</string>
+    <string name="factoy_alert">恢复出厂设置后所有内容将清空，确定要继续吗？</string>
+    <string name="formatting">正在格式化SDCARD……</string>
 
     <string name="test">测试</string>
     <string name="view_photo">查看图像</string>
